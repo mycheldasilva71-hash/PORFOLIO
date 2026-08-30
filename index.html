@@ -309,7 +309,11 @@
     transform-style: preserve-3d;
   }
 
-  .card:hover .card-inner{ transform: rotateY(180deg); }
+  @media (hover: hover){
+    .card:hover .card-inner{ transform: rotateY(180deg); }
+  }
+
+  .card.flipped .card-inner{ transform: rotateY(180deg); }
 
   .face{
     position:absolute;
@@ -577,7 +581,7 @@
 
     <div class="cards">
 
-      <div class="card">
+      <div class="card" data-modal="modalOverlay">
         <div class="card-inner">
           <div class="face face-front">
             <svg class="rings" width="52" height="52" viewBox="0 0 52 52">
@@ -596,7 +600,7 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-modal="modalOverlay2">
         <div class="card-inner">
           <div class="face face-front">
             <svg class="rings" width="52" height="52" viewBox="0 0 52 52">
@@ -697,6 +701,18 @@
     landing.classList.remove('hide');
     landing.classList.remove('exiting');
     backLink.classList.remove('show');
+  });
+
+  // Clique no card abre o modal direto (funciona em qualquer dispositivo)
+  document.querySelectorAll('.card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const targetId = card.getAttribute('data-modal');
+      if(targetId){
+        document.getElementById(targetId).classList.add('show');
+      } else {
+        card.classList.toggle('flipped');
+      }
+    });
   });
 
   // Modal da foto do projeto (Card 1)
