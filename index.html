@@ -137,6 +137,21 @@
     to{ opacity:1; transform: translateY(0); }
   }
 
+  @keyframes exit-up{
+    from{ opacity:1; transform: translateY(0); }
+    to{ opacity:0; transform: translateY(-42px); }
+  }
+
+  @keyframes shrink{
+    from{ stroke-dashoffset:0; opacity:0.55; }
+    to{ stroke-dashoffset:-400; opacity:0; }
+  }
+
+  @keyframes fade-out-bud{
+    from{ opacity:0.85; transform: scale(1); }
+    to{ opacity:0; transform: scale(0.3); }
+  }
+
   .enter-btn{
     all:unset;
     display:inline-flex;
@@ -182,6 +197,60 @@
     padding: 90px 24px 60px;
     background: var(--bg);
     position:relative;
+  }
+
+  #landing.exiting .eyebrow{
+    animation: exit-up 0.55s ease forwards;
+  }
+
+  #landing.exiting .hero-title{
+    animation: exit-up 0.7s cubic-bezier(.4,0,.6,1) forwards;
+  }
+
+  #landing.exiting .enter-btn{
+    animation: exit-up 0.45s ease forwards;
+  }
+
+  #landing.exiting .veins path{
+    animation: shrink 0.85s ease-in forwards;
+  }
+
+  #landing.exiting .veins path:nth-of-type(1){ animation-delay: 0.10s; }
+  #landing.exiting .veins path:nth-of-type(2){ animation-delay: 0.13s; }
+  #landing.exiting .veins path:nth-of-type(3){ animation-delay: 0.06s; }
+  #landing.exiting .veins path:nth-of-type(4){ animation-delay: 0.08s; }
+  #landing.exiting .veins path:nth-of-type(5){ animation-delay: 0.16s; }
+  #landing.exiting .veins path:nth-of-type(6){ animation-delay: 0.24s; }
+  #landing.exiting .veins path:nth-of-type(7){ animation-delay: 0.26s; }
+  #landing.exiting .veins path:nth-of-type(8){ animation-delay: 0.30s; }
+
+  #landing.exiting .veins circle{
+    animation: fade-out-bud 0.4s ease-in forwards;
+  }
+
+  #landing.exiting .veins circle:nth-of-type(1){ animation-delay: 0.02s; }
+  #landing.exiting .veins circle:nth-of-type(2){ animation-delay: 0.04s; }
+  #landing.exiting .veins circle:nth-of-type(3){ animation-delay: 0s; }
+  #landing.exiting .veins circle:nth-of-type(4){ animation-delay: 0.06s; }
+  #landing.exiting .veins circle:nth-of-type(5){ animation-delay: 0.08s; }
+
+  .gallery-heading,
+  .cards{
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(.2,.8,.2,1), transform 0.9s cubic-bezier(.2,.8,.2,1);
+  }
+
+  #gallery.reveal .gallery-heading{
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+  }
+
+  #gallery.reveal .cards{
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.6s;
   }
 
   .back-link{
@@ -591,16 +660,23 @@
 
 <script>
   const landing = document.getElementById('landing');
+  const gallery = document.getElementById('gallery');
   const enterBtn = document.getElementById('enterBtn');
   const backLink = document.getElementById('backLink');
 
   enterBtn.addEventListener('click', () => {
-    landing.classList.add('hide');
-    setTimeout(() => backLink.classList.add('show'), 500);
+    landing.classList.add('exiting');
+    gallery.classList.add('reveal');
+
+    setTimeout(() => {
+      landing.classList.add('hide');
+      backLink.classList.add('show');
+    }, 1150);
   });
 
   backLink.addEventListener('click', () => {
     landing.classList.remove('hide');
+    landing.classList.remove('exiting');
     backLink.classList.remove('show');
   });
 
