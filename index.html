@@ -396,8 +396,8 @@
     .cards{ grid-template-columns: 1fr; width:100%; max-width:340px; }
   }
 
-  /* ---------- MODAL (foto do projeto) ---------- */
-  #modalOverlay{
+  /* ---------- MODAIS (regra compartilhada, evita repetir o mesmo bug) ---------- */
+  .modal-overlay{
     position: fixed;
     inset: 0;
     background: rgba(6,11,8,0.88);
@@ -413,24 +413,7 @@
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
-  #modalOverlay2{
-    position: fixed;
-    inset: 0;
-    background: rgba(6,11,8,0.88);
-    backdrop-filter: blur(6px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-
-  #modalOverlay.show,
-  #modalOverlay2.show{
+  .modal-overlay.show{
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -468,8 +451,7 @@
     background: var(--lime);
   }
 
-  #modalOverlay.show .modal-box,
-  #modalOverlay2.show .modal-box{
+  .modal-overlay.show .modal-box{
     transform: scale(1) translateY(0);
     opacity: 1;
   }
@@ -555,8 +537,7 @@
     pointer-events: none;
   }
 
-  #modalOverlay.show .modal-close,
-  #modalOverlay2.show .modal-close{
+  .modal-overlay.show .modal-close{
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -649,21 +630,21 @@
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-modal="modalOverlay3">
         <div class="card-inner">
           <div class="face face-front">
             <svg class="rings" width="52" height="52" viewBox="0 0 52 52">
               <circle cx="26" cy="26" r="9"/><circle cx="26" cy="26" r="17"/><circle cx="26" cy="26" r="25"/>
             </svg>
             <div>
-              <div class="card-tag">Ilustração</div>
-              <div class="card-title">Projeto Três</div>
+              <div class="card-tag">Design & Edição</div>
+              <div class="card-title">Sua marca merece uma<br>identidade à altura.</div>
             </div>
           </div>
           <div class="face face-back">
-            <div class="card-tag">Ilustração</div>
-            <p>Descreva aqui o desafio, a solução e o resultado desse projeto em duas ou três frases curtas.</p>
-            <a class="see-more" href="#">Ver projeto →</a>
+            <div class="card-tag">Design & Edição</div>
+            <p>Criamos o logo e tratamos as fotos do seu negócio no Photoshop, deixando tudo com a cara do novo site — profissional, consistente e pronto pra impressionar.</p>
+            <button class="see-more" id="openModalBtn3">Ver mais →</button>
           </div>
         </div>
       </div>
@@ -672,7 +653,7 @@
   </section>
 
   <!-- MODAL: foto do projeto -->
-  <div id="modalOverlay">
+  <div id="modalOverlay" class="modal-overlay">
     <button class="modal-close" id="closeModalBtn">✕</button>
     <div class="modal-box">
       <img id="modalImg" src="foto-projeto1.jpg" alt="Mockup do site mostrado em laptop, tablet e celular">
@@ -691,7 +672,7 @@
   </div>
 
   <!-- MODAL: Google Ads -->
-  <div id="modalOverlay2">
+  <div id="modalOverlay2" class="modal-overlay">
     <button class="modal-close" id="closeModalBtn2">✕</button>
     <div class="modal-box">
       <img id="modalImg2" src="google-ads.svg" alt="Ilustração de um pin de localização apontando para um mapa, representando visibilidade no Google">
@@ -704,6 +685,25 @@
           <li>Você paga só quando alguém clica no anúncio.</li>
           <li>Atrai clientes que já estão prontos pra comprar.</li>
           <li>Relatórios claros de cliques, custo e retorno sobre o investimento.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Design & Edição -->
+  <div id="modalOverlay3" class="modal-overlay">
+    <button class="modal-close" id="closeModalBtn3">✕</button>
+    <div class="modal-box">
+      <img id="modalImg3" src="design-edicao.svg" alt="Ilustração de uma moldura de foto com ferramenta de caneta e paleta de cores, representando design e edição de imagens">
+      <div class="modal-caption">
+        <div class="card-tag">Design & Edição</div>
+        <p>Criamos o logo e cuidamos de toda a identidade visual do seu negócio, além de tratar fotos e imagens no Photoshop pra ficarem com a cara do novo site — profissionais, consistentes e prontas pra impressionar antes mesmo da primeira palavra.</p>
+
+        <div class="trust-heading">Por que contratar</div>
+        <ul class="trust-list">
+          <li>Identidade visual única, feita do zero pro seu negócio.</li>
+          <li>Fotos e imagens com edição profissional, prontas pra vender.</li>
+          <li>Arquivos entregues certinhos pra site, redes sociais e impressão.</li>
         </ul>
       </div>
     </div>
@@ -745,52 +745,38 @@
     });
   });
 
-  // Modal da foto do projeto (Card 1)
-  const modalOverlay = document.getElementById('modalOverlay');
-  const openModalBtn = document.getElementById('openModalBtn');
-  const closeModalBtn = document.getElementById('closeModalBtn');
+  // Modais: fecha ao clicar no X, fora da caixa, ou apertando Esc
+  // (genérico — funciona pra qualquer modal novo que você adicionar depois)
+  document.querySelectorAll('.modal-overlay').forEach((overlay) => {
+    const closeBtn = overlay.querySelector('.modal-close');
 
-  function openModal(e){
-    e.stopPropagation();
-    modalOverlay.classList.add('show');
-  }
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('show');
+    });
 
-  function closeModal(){
-    modalOverlay.classList.remove('show');
-  }
-
-  openModalBtn.addEventListener('click', openModal);
-  closeModalBtn.addEventListener('click', closeModal);
-
-  modalOverlay.addEventListener('click', (e) => {
-    if(e.target === modalOverlay) closeModal();
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) overlay.classList.remove('show');
+    });
   });
 
-  // Modal do Google Ads (Card 2)
-  const modalOverlay2 = document.getElementById('modalOverlay2');
-  const openModalBtn2 = document.getElementById('openModalBtn2');
-  const closeModalBtn2 = document.getElementById('closeModalBtn2');
-
-  function openModal2(e){
-    e.stopPropagation();
-    modalOverlay2.classList.add('show');
-  }
-
-  function closeModal2(){
-    modalOverlay2.classList.remove('show');
-  }
-
-  openModalBtn2.addEventListener('click', openModal2);
-  closeModalBtn2.addEventListener('click', closeModal2);
-
-  modalOverlay2.addEventListener('click', (e) => {
-    if(e.target === modalOverlay2) closeModal2();
+  // Os botões "Ver mais" dentro dos cards também abrem o modal
+  // (o clique no card já faz isso, isso aqui é só reforço caso clique só no botão)
+  document.querySelectorAll('.see-more[id^="openModalBtn"]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.card');
+      const targetId = card.getAttribute('data-modal');
+      if(targetId){
+        document.getElementById(targetId).classList.add('show');
+      }
+    });
   });
 
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape'){
-      closeModal();
-      closeModal2();
+      document.querySelectorAll('.modal-overlay.show').forEach((overlay) => {
+        overlay.classList.remove('show');
+      });
     }
   });
 </script>
