@@ -350,9 +350,30 @@
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: hidden;
     transform: scale(0.94) translateY(12px);
     opacity: 0;
     transition: transform 0.5s cubic-bezier(.2,.8,.2,1), opacity 0.5s ease;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--lime-dim) transparent;
+  }
+
+  .modal-box::-webkit-scrollbar{
+    width: 6px;
+  }
+
+  .modal-box::-webkit-scrollbar-track{
+    background: transparent;
+  }
+
+  .modal-box::-webkit-scrollbar-thumb{
+    background: var(--lime-dim);
+    border-radius: 10px;
+  }
+
+  .modal-box::-webkit-scrollbar-thumb:hover{
+    background: var(--lime);
   }
 
   #modalOverlay.show .modal-box{
@@ -421,9 +442,9 @@
 
   .modal-close{
     all: unset;
-    position: absolute;
-    top: -18px;
-    right: -18px;
+    position: fixed;
+    top: 24px;
+    right: 24px;
     width: 36px;
     height: 36px;
     display: flex;
@@ -435,6 +456,7 @@
     font-size: 1.1rem;
     cursor: pointer;
     transition: transform 0.25s ease;
+    z-index: 101;
   }
 
   .modal-close:hover{ transform: rotate(90deg); }
@@ -548,8 +570,8 @@
 
   <!-- MODAL: foto do projeto -->
   <div id="modalOverlay">
+    <button class="modal-close" id="closeModalBtn">✕</button>
     <div class="modal-box">
-      <button class="modal-close" id="closeModalBtn">✕</button>
       <img id="modalImg" src="foto-projeto1.jpg" alt="Mockup do site mostrado em laptop, tablet e celular">
       <div class="modal-caption">
         <div class="card-tag">Bastidores</div>
