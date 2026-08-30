@@ -409,12 +409,31 @@
     z-index: 100;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
-  #modalOverlay.show{
+  #modalOverlay2{
+    position: fixed;
+    inset: 0;
+    background: rgba(6,11,8,0.88);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  #modalOverlay.show,
+  #modalOverlay2.show{
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
 
   .modal-box{
@@ -449,7 +468,8 @@
     background: var(--lime);
   }
 
-  #modalOverlay.show .modal-box{
+  #modalOverlay.show .modal-box,
+  #modalOverlay2.show .modal-box{
     transform: scale(1) translateY(0);
     opacity: 1;
   }
@@ -528,8 +548,18 @@
     border-radius: 50%;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, opacity 0.25s ease;
     z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  #modalOverlay.show .modal-close,
+  #modalOverlay2.show .modal-close{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .modal-close:hover{ transform: rotate(90deg); }
