@@ -603,14 +603,14 @@
               <circle cx="26" cy="26" r="6"/><circle cx="26" cy="26" r="12"/><circle cx="26" cy="26" r="18"/><circle cx="26" cy="26" r="24"/>
             </svg>
             <div>
-              <div class="card-tag">Design Web</div>
-              <div class="card-title">Projeto Dois</div>
+              <div class="card-tag">Google Ads</div>
+              <div class="card-title">Apareça exatamente<br>quando ele te procura.</div>
             </div>
           </div>
           <div class="face face-back">
-            <div class="card-tag">Design Web</div>
-            <p>Descreva aqui o desafio, a solução e o resultado desse projeto em duas ou três frases curtas.</p>
-            <a class="see-more" href="#">Ver projeto →</a>
+            <div class="card-tag">Google Ads</div>
+            <p>Colocamos sua empresa no topo do Google no momento exato em que alguém procura pelo que você vende — com as palavras-chave certas, anúncios que convertem e orçamento otimizado toda semana.</p>
+            <button class="see-more" id="openModalBtn2">Ver mais →</button>
           </div>
         </div>
       </div>
@@ -654,6 +654,23 @@
         </ul>
       </div>
     </div>
+  <!-- MODAL: Google Ads -->
+  <div id="modalOverlay2">
+    <button class="modal-close" id="closeModalBtn2">✕</button>
+    <div class="modal-box">
+      <img id="modalImg2" src="google-ads.svg" alt="Ilustração de um pin de localização apontando para um mapa, representando visibilidade no Google">
+      <div class="modal-caption">
+        <div class="card-tag">Google Ads</div>
+        <p>Anúncios que colocam sua empresa no topo do Google exatamente quando alguém está procurando pelo que você vende. Pesquisa de palavras-chave, campanhas de busca e display, anúncios com foco em conversão e otimização contínua de orçamento.</p>
+
+        <div class="trust-heading">Por que contratar</div>
+        <ul class="trust-list">
+          <li>Você paga só quando alguém clica no anúncio.</li>
+          <li>Atrai clientes que já estão prontos pra comprar.</li>
+          <li>Relatórios claros de cliques, custo e retorno sobre o investimento.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -680,13 +697,13 @@
     backLink.classList.remove('show');
   });
 
-  // Modal da foto do projeto
+  // Modal da foto do projeto (Card 1)
   const modalOverlay = document.getElementById('modalOverlay');
   const openModalBtn = document.getElementById('openModalBtn');
   const closeModalBtn = document.getElementById('closeModalBtn');
 
   function openModal(e){
-    e.stopPropagation(); // impede que o clique também vire o card
+    e.stopPropagation();
     modalOverlay.classList.add('show');
   }
 
@@ -701,8 +718,32 @@
     if(e.target === modalOverlay) closeModal();
   });
 
+  // Modal do Google Ads (Card 2)
+  const modalOverlay2 = document.getElementById('modalOverlay2');
+  const openModalBtn2 = document.getElementById('openModalBtn2');
+  const closeModalBtn2 = document.getElementById('closeModalBtn2');
+
+  function openModal2(e){
+    e.stopPropagation();
+    modalOverlay2.classList.add('show');
+  }
+
+  function closeModal2(){
+    modalOverlay2.classList.remove('show');
+  }
+
+  openModalBtn2.addEventListener('click', openModal2);
+  closeModalBtn2.addEventListener('click', closeModal2);
+
+  modalOverlay2.addEventListener('click', (e) => {
+    if(e.target === modalOverlay2) closeModal2();
+  });
+
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeModal();
+    if(e.key === 'Escape'){
+      closeModal();
+      closeModal2();
+    }
   });
 </script>
 
