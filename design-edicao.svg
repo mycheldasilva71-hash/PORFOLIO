@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 680" width="800" height="680">
+  <defs>
+    <radialGradient id="bgGlow3" cx="50%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#a9f26b" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#a9f26b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="frameLand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a2b1f"/>
+      <stop offset="100%" stop-color="#101d16"/>
+    </linearGradient>
+    <linearGradient id="mountainFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8ff8f"/>
+      <stop offset="100%" stop-color="#7fbf4d"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="680" rx="24" fill="#060b08"/>
+  <rect x="0" y="0" width="800" height="680" rx="24" fill="url(#bgGlow3)"/>
+
+  <g opacity="0.5" stroke="#7c9a80" stroke-width="1" fill="none" stroke-linecap="round">
+    <path d="M -20,150 C 140,120 220,210 340,180 C 460,150 520,90 660,120 C 740,138 780,110 830,125"/>
+    <path d="M -20,470 C 120,510 220,440 360,480 C 480,512 560,460 680,490 C 750,508 790,480 830,495"/>
+    <path d="M 90,10 C 110,110 60,180 90,270 C 115,350 70,430 100,510 C 115,560 90,600 100,650"/>
+    <path d="M 660,10 C 680,100 640,170 670,250 C 695,320 650,400 680,480 C 700,540 670,590 685,650"/>
+  </g>
+
+  <g opacity="0.55" fill="#7c9a80">
+    <circle cx="150" cy="200" r="2.5"/>
+    <circle cx="660" cy="180" r="2.5"/>
+    <circle cx="120" cy="470" r="2.5"/>
+    <circle cx="700" cy="450" r="2.5"/>
+  </g>
+
+  <text x="400" y="66" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="13" letter-spacing="3" fill="#7c9a80">DESIGN &amp; EDIÇÃO</text>
+
+  <text x="400" y="106" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="27" fill="#f2ede2">
+    <tspan x="400" dy="0">Transformamos sua marca</tspan>
+    <tspan x="400" dy="35" fill="#a9f26b">em algo que ninguém</tspan>
+    <tspan x="400" dy="35" fill="#f2ede2">esquece.</tspan>
+  </text>
+
+  <!-- Moldura / foto -->
+  <g>
+    <rect x="255" y="255" width="290" height="220" rx="10" fill="url(#frameLand)" stroke="#24352a" stroke-width="2"/>
+    <circle cx="475" cy="295" r="16" fill="#c8ff8f" opacity="0.9"/>
+    <path d="M 255,455 L 350,375 L 400,415 L 470,340 L 545,410 L 545,475 L 255,475 Z" fill="url(#mountainFill)" opacity="0.85"/>
+  </g>
+
+  <!-- Caneta / pen tool -->
+  <g stroke="#a9f26b" stroke-width="1.4" fill="none">
+    <path d="M 320,330 C 360,280 420,280 460,330" stroke-dasharray="3 5" opacity="0.8"/>
+    <circle cx="320" cy="330" r="6" fill="#060b08" stroke="#a9f26b" stroke-width="1.5"/>
+    <circle cx="460" cy="330" r="6" fill="#060b08" stroke="#a9f26b" stroke-width="1.5"/>
+    <circle cx="390" cy="292" r="4" fill="#a9f26b"/>
+  </g>
+
+  <!-- Paleta de cores -->
+  <g>
+    <circle cx="330" cy="530" r="14" fill="#a9f26b"/>
+    <circle cx="368" cy="530" r="14" fill="#7fbf4d"/>
+    <circle cx="406" cy="530" r="14" fill="#f2ede2"/>
+    <circle cx="444" cy="530" r="14" fill="#7c9a80"/>
+  </g>
+
+  <text x="400" y="635" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" letter-spacing="4" fill="#7c9a80">SUA MARCA, BEM CONTADA</text>
+</svg>
