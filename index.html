@@ -299,6 +299,7 @@
   .card{
     height: 380px;
     cursor:pointer;
+    position: relative;
   }
 
   .card-inner{
@@ -396,16 +397,13 @@
     .cards{ grid-template-columns: 1fr; width:100%; max-width:340px; }
   }
 
-  /* ---------- CARD 2 + BOTÃO DE CONTATOS ---------- */
-  .card-wrap{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:18px;
-  }
-
+  /* ---------- BOTÃO DE CONTATOS (fica de fora do flip 3D do card 2) ---------- */
   .contact-pill{
     all:unset;
+    position: absolute;
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%);
     display:inline-flex;
     align-items:center;
     gap:9px;
@@ -418,6 +416,7 @@
     font-size:0.72rem;
     letter-spacing:0.14em;
     text-transform:uppercase;
+    white-space: nowrap;
     cursor:pointer;
     transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   }
@@ -425,7 +424,7 @@
   .contact-pill:hover{
     border-color: var(--lime-dim);
     color: var(--lime);
-    transform: translateY(-2px);
+    transform: translateX(-50%) translateY(-2px);
   }
 
   .pill-dot{
@@ -435,6 +434,23 @@
     background: var(--lime);
     flex-shrink:0;
     animation: breathe 3.4s ease-in-out infinite;
+  }
+
+  /* No celular, o botão vira fixo na tela — sempre visível, mesmo rolando a página */
+  @media (max-width: 880px){
+    .contact-pill{
+      position: fixed;
+      top: auto;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      box-shadow: 0 10px 26px rgba(6,11,8,0.55);
+    }
+
+    .contact-pill:hover{
+      transform: translateX(-50%);
+    }
   }
 
   /* ---------- DRAWER DE CONTATOS (sobe de baixo) ---------- */
