@@ -397,13 +397,18 @@
     .cards{ grid-template-columns: 1fr; width:100%; max-width:340px; }
   }
 
-  /* ---------- BOTÃO DE CONTATOS (fica de fora do flip 3D do card 2) ---------- */
+  /* ---------- BOTÃO DE CONTATOS ---------- */
+  .cards-section{
+    position: relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+  }
+
+  /* Por padrão (celular): fica acima do card 1, como parte normal da página */
   .contact-pill{
     all:unset;
-    position: absolute;
-    top: calc(100% + 18px);
-    left: 50%;
-    transform: translateX(-50%);
     display:inline-flex;
     align-items:center;
     gap:9px;
@@ -418,13 +423,14 @@
     text-transform:uppercase;
     white-space: nowrap;
     cursor:pointer;
+    margin-bottom: 24px;
     transition: border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   }
 
   .contact-pill:hover{
     border-color: var(--lime-dim);
     color: var(--lime);
-    transform: translateX(-50%) translateY(-2px);
+    transform: translateY(-2px);
   }
 
   .pill-dot{
@@ -436,20 +442,18 @@
     animation: breathe 3.4s ease-in-out infinite;
   }
 
-  /* No celular, o botão vira fixo na tela — sempre visível, mesmo rolando a página */
-  @media (max-width: 880px){
+  /* No computador: fica solto, abaixo do card 2 do meio */
+  @media (min-width: 881px){
     .contact-pill{
-      position: fixed;
-      top: auto;
-      bottom: 22px;
+      position: absolute;
+      top: calc(380px + 18px);
       left: 50%;
       transform: translateX(-50%);
-      z-index: 50;
-      box-shadow: 0 10px 26px rgba(6,11,8,0.55);
+      margin-bottom: 0;
     }
 
     .contact-pill:hover{
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(-2px);
     }
   }
 
@@ -776,7 +780,13 @@
       <h2>O que já floresceu</h2>
     </div>
 
-    <div class="cards">
+    <div class="cards-section">
+
+      <button class="contact-pill" id="contactPillBtn">
+        <span class="pill-dot"></span> Contatos
+      </button>
+
+      <div class="cards">
 
       <div class="card" data-modal="modalOverlay">
         <div class="card-inner">
@@ -814,9 +824,6 @@
             <button class="see-more" id="openModalBtn2">Ver mais →</button>
           </div>
         </div>
-        <button class="contact-pill" id="contactPillBtn">
-          <span class="pill-dot"></span> Contatos
-        </button>
       </div>
 
       <div class="card" data-modal="modalOverlay3">
@@ -836,6 +843,8 @@
             <button class="see-more" id="openModalBtn3">Ver mais →</button>
           </div>
         </div>
+      </div>
+
       </div>
 
     </div>
